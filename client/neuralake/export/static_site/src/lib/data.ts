@@ -1,9 +1,10 @@
-// see https://vitejs.dev/guide/api-plugin.html#virtual-modules
-// see web_catalog/src/plugins/data-json-plugin.js
-
-// @ts-ignore
-import data from 'virtual:data-json'
 import { ExportedNeuralake } from './types'
 
-// We have to as-cast due to https://github.com/microsoft/TypeScript/issues/32063 and the type of invocation_type.
-export const neuralake = data as ExportedNeuralake
+// /data.json is expected to be copied into the
+// root directory of the static site. 
+const response = await fetch('/data.json')
+if (!response.ok) {
+  throw new Error(`Failed to load data: ${response.statusText}`)
+}
+
+export const neuralake = await response.json() as ExportedNeuralake
