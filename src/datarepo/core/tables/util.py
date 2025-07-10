@@ -2,11 +2,15 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Any, NamedTuple, Optional
 
+import logging
 import boto3
 import polars as pl
 import pyarrow as pa
 
 from datarepo.core.tables.filters import Filter, NormalizedFilters
+
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -77,13 +81,19 @@ def get_storage_options(
 
     if boto3_session is not None:
         creds = boto3_session.get_credentials()
-        storage_options = {
-            **storage_options,
-            "aws_access_key_id": creds.access_key,
-            "aws_secret_access_key": creds.secret_key,
-            "aws_session_token": creds.token,
-            "aws_region": boto3_session.region_name,
-        }
+        if creds is not None:
+            storage_options = {
+                **storage_options,
+                "aws_access_key_id": creds.access_key,
+                "aws_secret_access_key": creds.secret_key,
+                "aws_session_token": creds.token or "",
+                "aws_region": boto3_session.region_name,
+            }
+        else:
+            logger.error(
+                "Boto3 session provided but no credentials found. "
+                "Storage options will not include AWS credentials."
+            )
 
     # Storage options passed to delta-rs need to be not null
     storage_options = {k: v for k, v in storage_options.items() if v}
@@ -111,13 +121,19 @@ def get_pyarrow_filesystem_args(
 
     if boto3_session is not None:
         creds = boto3_session.get_credentials()
-        pyarrow_filesystem_args = {
-            **pyarrow_filesystem_args,
-            "access_key": creds.access_key,
-            "secret_key": creds.secret_key,
-            "session_token": creds.token,
-            "region": boto3_session.region_name,
-        }
+        if creds is not None:
+            pyarrow_filesystem_args = {
+                **pyarrow_filesystem_args,
+                "access_key": creds.access_key,
+                "secret_key": creds.secret_key,
+                "session_token": creds.token or "",
+                "region": boto3_session.region_name,
+            }
+        else:
+            logger.error(
+                "Boto3 session provided but no credentials found. "
+                "Storage options will not include AWS credentials."
+            )
 
     pyarrow_filesystem_args = {
         k: v for k, v in pyarrow_filesystem_args.items() if v is not None
