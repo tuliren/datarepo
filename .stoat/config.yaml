@@ -20,3 +20,7 @@ plugins:
       metadata:
         name: Mypy Report
       path: .report/mypy-report/
+    flake8_report:
+      metadata:
+        name: Flake8 Report
+      path: .report/flake8/
