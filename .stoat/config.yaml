@@ -24,3 +24,7 @@ plugins:
       metadata:
         name: Flake8 Report
       path: .report/flake8/
+    site_preview:
+      metadata:
+        name: Site Preview
+      path: site/
