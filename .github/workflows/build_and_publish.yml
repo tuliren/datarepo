@@ -35,6 +35,11 @@ jobs:
       run: |
         pytest test --cov=src/datarepo --cov-report=term-missing
 
+
+    - name: Run Stoat Action
+      uses: stoat-dev/stoat-action@v0
+      if: always()
+
   code-quality:
     runs-on: ubuntu-latest
     steps:
@@ -62,6 +67,11 @@ jobs:
     - name: Run mypy
       run: |
         mypy src/datarepo
+
+
+    - name: Run Stoat Action
+      uses: stoat-dev/stoat-action@v0
+      if: always()
 
   build-and-publish:
     needs: [run-tests, code-quality]
@@ -109,6 +119,11 @@ jobs:
           echo "TWINE_PASSWORD is set: $([ ! -z "$TWINE_PASSWORD" ] && echo "yes" || echo "no")"
           python -m twine upload --username __token__ --password "$TWINE_PASSWORD" dist/* --verbose
 
+
+      - name: Run Stoat Action
+        uses: stoat-dev/stoat-action@v0
+        if: always()
+
   build-and-publish-docs:
     if: github.ref == 'refs/heads/main' || github.event_name == 'release' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
@@ -150,3 +165,7 @@ jobs:
           publish_dir: ./site
           publish_branch: gh-pages
           cname: data-repo.io
+
+      - name: Run Stoat Action
+        uses: stoat-dev/stoat-action@v0
+        if: always()
