@@ -11,7 +11,7 @@ plugins:
     test_results:
       metadata:
         name: Test Results
-      path: test/report.html
+      path: .report/test_report.html
     test_coverage:
       metadata:
         name: Test Coverage
