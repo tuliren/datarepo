@@ -63,11 +63,10 @@ jobs:
     - name: Run black
       run: |
         black --check src/datarepo
-    
+
     - name: Run mypy
       run: |
-        mypy src/datarepo
-
+        mypy src/datarepo --html-report=.report/mypy-report
 
     - name: Run Stoat Action
       uses: stoat-dev/stoat-action@v0

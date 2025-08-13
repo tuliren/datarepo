@@ -16,3 +16,7 @@ plugins:
       metadata:
         name: Test Coverage
       path: htmlcov/
+    mypy_report:
+      metadata:
+        name: Mypy Report
+      path: .report/mypy-report/
