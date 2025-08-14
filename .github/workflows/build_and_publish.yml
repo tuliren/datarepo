@@ -33,7 +33,7 @@ jobs:
     
     - name: Run tests with coverage
       run: |
-        pytest test --cov=src/datarepo --cov-report=html --cov-report=term-missing --html=test/test_report.html --self-contained-html
+        pytest test --cov=src/datarepo --cov-report=html:test/coverage_report --cov-report=term-missing --html=test/test_report.html --self-contained-html
 
     - name: Run Stoat Action
       uses: stoat-dev/stoat-action@v0
