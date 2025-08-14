@@ -4,29 +4,16 @@ enabled: true
 plugins:
   job_runtime:
     enabled: true
-  auto_upload:
-    enabled: true
-    auto_upload: true
   static_hosting:
     test_results:
-      metadata:
-        name: Test Results
       path: .report/test_report.html
     test_coverage:
-      metadata:
-        name: Test Coverage
       path: htmlcov/
     mypy_report:
-      metadata:
-        name: Mypy Report
       path: .report/mypy-report/
     flake8_report:
-      metadata:
-        name: Flake8 Report
       path: .report/flake8/
     site_preview:
-      metadata:
-        name: Site Preview
       path: site/
   metric:
     site_preview_size:
@@ -37,3 +24,6 @@ plugins:
       y_title: Size (bytes)
       tags:
         - site_preview_size
+  workflow_dispatch:
+    test-workflow-dispatch:
+      filename: test-workflow-dispatch.yml

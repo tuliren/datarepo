@@ -1,0 +1,42 @@
+name: Test Workflow Dispatch
+
+on:
+  workflow_dispatch:
+    inputs:
+      workflow_run_identifier:
+        description: Unique identifier for each workflow run
+        required: false
+        type: string
+      logLevel:
+        description: 'Log level'
+        required: true
+        type: choice
+        default: 'warning'
+        options:
+          - info
+          - warning
+          - debug
+      print_tags:
+        description: 'True to print to STDOUT'
+        required: true
+        type: boolean
+        default: 'true'
+      tags:
+        description: 'Test scenario tags'
+        required: false
+        type: string
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: false
+
+jobs:
+  print-tag:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.print_tags }}
+    steps:
+      - name: Print the input tag to STDOUT
+        run: |
+          echo "Log level: ${{ inputs.logLevel }}"
+          echo "Tags: ${{ inputs.tags }}"
+          echo "Environment: ${{ inputs.environment }}"
