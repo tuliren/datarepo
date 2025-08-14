@@ -21,7 +21,7 @@ plugins:
   chart:
     site_preview_size_chart:
       title: Site Preview Size
-      y_title: Size (bytes)
+      y_title: Size (MB)
       tags:
         - site_preview_size
   workflow_dispatch:
