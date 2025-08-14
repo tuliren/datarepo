@@ -31,11 +31,6 @@ jobs:
         python3.10 -m pip install --upgrade pip
         python3.10 -m pip install --no-cache-dir -e ".[dev]"
 
-    - name: Add arbitrary sleep
-      run: |
-        echo "Adding arbitrary sleep for runtime chart"
-        sleep 30
-
     - name: Run tests with coverage
       run: |
         pytest test --cov=src/datarepo --cov-report=html:test/coverage_report --cov-report=term-missing --html=test/test_report.html --self-contained-html
