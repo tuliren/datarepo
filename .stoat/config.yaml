@@ -8,7 +8,7 @@ plugins:
     test_results:
       path: test/test_report.html
     test_coverage:
-      path: htmlcov/
+      path: test/coverage_report/
     mypy_report:
       path: test/mypy-report/
     flake8_report:
