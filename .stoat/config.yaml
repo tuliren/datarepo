@@ -6,13 +6,13 @@ plugins:
     enabled: true
   static_hosting:
     test_results:
-      path: .report/test_report.html
+      path: test/test_report.html
     test_coverage:
       path: htmlcov/
     mypy_report:
-      path: .report/mypy-report/
+      path: test/mypy-report/
     flake8_report:
-      path: .report/flake8/
+      path: test/flake8/
     site_preview:
       path: site/
   metric:
@@ -21,7 +21,7 @@ plugins:
   chart:
     site_preview_size_chart:
       title: Site Preview Size
-      y_title: Size (bytes)
+      y_title: Size (MB)
       tags:
         - site_preview_size
   workflow_dispatch:
