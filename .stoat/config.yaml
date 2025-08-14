@@ -38,6 +38,5 @@ plugins:
       tags:
         - site_preview_size
   workflow_dispatch:
-    test:
+    test-workflow-dispatch:
       filename: test-workflow-dispatch.yml
-      identifier: workflow_test.${{ github.event.inputs.workflow_run_identifier }}
