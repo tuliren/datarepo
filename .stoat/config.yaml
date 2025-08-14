@@ -28,3 +28,12 @@ plugins:
       metadata:
         name: Site Preview
       path: site/
+  metric:
+    site_preview_size:
+      filename: site_preview_size.csv
+  chart:
+    site_preview_size_chart:
+      title: Site Preview Size
+      y_title: Size (bytes)
+      tags:
+        - site_preview_size
